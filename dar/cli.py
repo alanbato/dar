@@ -4,14 +4,27 @@
 import sys
 import click
 
+import dar
 
-@click.command()
+
+@click.group()
 def main(args=None):
     """Console script for dar."""
-    click.echo("Replace this message by putting your code into "
-               "dar.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
-    return 0
+
+
+@main.command()
+@click.argument("key")  # , help="The shortand to register.")
+@click.argument("command", nargs=-1)  # , help="The command to be run.")
+def register(key, command):
+    config = dar.get_config()
+    dar.register_alias(config, key, command)
+
+
+@main.command()
+@click.argument("key")
+def run(key):
+    config = dar.get_config()
+    dar.call_alias(config, key)
 
 
 if __name__ == "__main__":
