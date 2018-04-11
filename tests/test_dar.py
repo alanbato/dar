@@ -6,12 +6,12 @@ import os
 import pytest
 from pretend import call_recorder, call
 
-import dar.dar as dar
+from dar.dar import register_alias, call_alias, get_config
 
 
 @pytest.fixture(name="config_file", scope="function")
 def config_file(request):
-    yield dar.get_config()
+    yield get_config()
 
     try:
         os.remove(".darconfig")
@@ -22,7 +22,7 @@ def config_file(request):
 def test_register_alias(config_file):
     alias = "tests"
     command = "pytest /path/to/tests"
-    dar.register_alias(config_file, alias, command)
+    register_alias(config_file, alias, command)
 
     assert config_file.has_section(alias)
     assert config_file.has_option(alias, command)
@@ -33,10 +33,10 @@ def test_call_alias(config_file):
     command = "pytest /path/to/tests"
     config_file.add_section(alias)
     config_file.set(alias, command)
-    dar.call_alias = call_recorder(lambda x, y, z: (y, z))
-    dar.call_alias(config_file, alias, command)
+    call_alias = call_recorder(lambda x, y, z: (y, z))
+    call_alias(config_file, alias, command)
 
-    assert dar.call_alias.calls == [call(config_file, alias, command)]
+    assert call_alias.calls == [call(config_file, alias, command)]
 
 
 def test_get_config_no_file():
@@ -44,6 +44,6 @@ def test_get_config_no_file():
         os.remove(".darconfig")
     except FileNotFoundError:
         pass
-    config = dar.get_config()
+    config = get_config()
     assert len(config.items()) == 1
     assert len(config["DEFAULT"]) == 0

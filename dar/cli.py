@@ -9,7 +9,7 @@ from dar import dar
 
 @click.group()
 def main(args=None):
-    """Dar is a command line toolbelt for managing different project workflows. """
+    """Dar is a command line toolbelt for managing different project workflows."""
 
 
 @main.command()
