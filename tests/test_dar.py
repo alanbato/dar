@@ -1,38 +1,49 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `dar` package."""
+"""Tests for the main module of the `dar` package."""
+import os
 
 import pytest
-
-from click.testing import CliRunner
+from pretend import call_recorder, call
 
 from dar import dar
-from dar import cli
 
 
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
+@pytest.fixture(name="config_file", scope="function")
+def config_file(request):
+    yield dar.get_config()
 
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+    try:
+        os.remove(".darconfig")
+    except FileNotFoundError:
+        pass
 
 
-def test_command_line_interface():
-    """Test the CLI."""
-    runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'dar.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+def test_register_alias(config_file):
+    alias = "tests"
+    command = "pytest /path/to/tests"
+    dar.register_alias(config_file, alias, command)
+
+    assert config_file.has_section(alias)
+    assert config_file.has_option(alias, command)
+
+
+def test_call_alias(config_file):
+    alias = "tests"
+    command = "pytest /path/to/tests"
+    config_file.add_section(alias)
+    config_file.set(alias, command)
+    dar.call_alias = call_recorder(lambda x, y, z: (y, z))
+    dar.call_alias(config_file, alias, command)
+
+    assert dar.call_alias.calls == [call(config_file, alias, command)]
+
+
+def test_get_config_no_file():
+    try:
+        os.remove(".darconfig")
+    except FileNotFoundError:
+        pass
+    config = dar.get_config()
+    assert len(config.items()) == 1
+    assert len(config["DEFAULT"]) == 0

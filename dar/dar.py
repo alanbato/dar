@@ -16,7 +16,7 @@ def register_alias(config: ConfigParser, key: str, command: str):
     # Create the new section for that alias
     config[key] = {}
     # Populate it with the command
-    config.set(key, " ".join(command))
+    config.set(key, command)
     with open(".darconfig", "w", encoding="utf-8") as config_file:
         config.write(config_file)
 
@@ -33,7 +33,7 @@ def call_alias(config: ConfigParser, key: str):
         raise ValueError(f"Alias {key} is not set")
 
     for command in commands.keys():
-        print(f'Running: {command}')
+        print(f"Running: {command}")
         subprocess.run(command.split(" "))
 
 

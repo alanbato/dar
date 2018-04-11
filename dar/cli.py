@@ -4,12 +4,12 @@
 import sys
 import click
 
-import dar
+from dar import dar
 
 
 @click.group()
 def main(args=None):
-    """Console script for dar."""
+    """Dar is a command line toolbelt for managing different project workflows. """
 
 
 @main.command()
@@ -17,6 +17,7 @@ def main(args=None):
 @click.argument("command", nargs=-1)
 def register(key, command):
     config = dar.get_config()
+    command = " ".join(command)
     dar.register_alias(config, key, command)
 
 
