@@ -13,12 +13,13 @@ Sphinx = "*"
 twine = "*"
 pytest = "*"
 pytest-runner = "*"
-black = "*"
+pretend = "*"
 
 [packages]
 click = "*"
 "e1839a8" = {path = ".", editable = true}
 pytest = "*"
+bumpversion = "*"
 
 [requires]
 python_version = "3.6"
