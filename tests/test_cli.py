@@ -6,7 +6,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from dar import cli
+import dar.cli as cli
 
 
 def test_basic_command_line_interface():

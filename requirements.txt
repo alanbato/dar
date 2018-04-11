@@ -1,8 +1,8 @@
 attrs==17.4.0
-bumpversion==0.5.3
 click==6.7
 more-itertools==4.1.0
 pluggy==0.6.0
+pretend==1.0.8
 py==1.5.3
 pytest==3.5.0
 six==1.11.0

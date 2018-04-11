@@ -6,7 +6,7 @@ import os
 import pytest
 from pretend import call_recorder, call
 
-from dar import dar
+import dar.dar as dar
 
 
 @pytest.fixture(name="config_file", scope="function")
