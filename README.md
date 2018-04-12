@@ -10,7 +10,7 @@
 
 _Dar_ is a command line toolbelt for managing different project workflows.
 
-Why is it a toolbelt? Because _Dar_ is not a tool that can be used _by itself_, but a place to store all the commands you use in a given project. _Dar_ remembers the workflows across all the different projects you contribute to so you don't have yo.
+Why is it a toolbelt? Because _Dar_ is not a tool that can be used _by itself_, but a place to store all the commands you use in a given project. _Dar_ remembers the workflows across all the different projects you contribute to so you don't have to.
 
 It is important to note that dar is **user focused**. The user is the one that registers and uses the commands to their own preference. Projects do not need to adopt dar for contributors of that project to benefit from it. 
 
@@ -27,7 +27,7 @@ Then you install it with:
 $ pip install dar
 ```
 
-Although _Dar_ is written in Python, it is language agnostic and can be used in _virtuall_ any project. 
+Although _Dar_ is written in Python, it is language agnostic and can be used in _virtually_ any project. 
 
 ### Usage
 
