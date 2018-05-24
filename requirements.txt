@@ -1,6 +1,6 @@
 attrs==17.4.0
 click==6.7
-more-itertools==4.1.0
+more-itertools==4.2.0
 pluggy==0.6.0
 pretend==1.0.8
 py==1.5.3
