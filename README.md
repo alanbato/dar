@@ -68,7 +68,7 @@ sudo systemctl restart docker
 * [Click](http://click.pocoo.org/) - For the command line interface.
 * The `subprocess` and `configparser` built-in modules.
 
-### Developtment Tools
+### Development Tools
 
 * [Pytest](https://docs.pytest.org/) - For painless testing.
 * [Black](https://github.com/ambv/black) - Uncompromising code formatting.
