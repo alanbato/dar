@@ -4,5 +4,5 @@ more-itertools==4.2.0
 pluggy==0.6.0
 pretend==1.0.9
 py==1.5.3
-pytest==3.6.1
+pytest==4.4.2
 six==1.11.0
